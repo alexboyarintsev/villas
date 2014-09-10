@@ -12,7 +12,7 @@
     <mvc:annotation-driven />
     <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
     
-    <!--<context:component-scan base-package="com.booking" />-->
+    <context:component-scan base-package="main.com.villas" />
     
     <!--Loading properties to context, will inject them into beans using @Value annotation-->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -22,10 +22,5 @@
             </list>
         </property>
     </bean>
-    
-    <!-- Data Source -->
-    <jee:jndi-lookup id="dataSource"
-                     jndi-name="jdbc/villasDS"
-                     resource-ref="true" />
     
 </beans>

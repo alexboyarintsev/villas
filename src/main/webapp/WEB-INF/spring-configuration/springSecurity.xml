@@ -14,21 +14,21 @@
 		<logout logout-success-url="/logout" />
 	</http>-->
     	
-    <http auto-config="true">
-		<intercept-url pattern="/*" access="ROLE_USER" />
-	</http>
+    <!--<http auto-config="true">-->
+        <!--<intercept-url pattern="/*" access="ROLE_USER" />-->
+    <!--</http>-->
     
 <!--    <authentication-manager>
         <authentication-provider user-service-ref="userService"/>
     </authentication-manager>-->
-    
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="developer" password="developer" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
-	</authentication-manager>
+    <!---->
+    <!--<authentication-manager>-->
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="developer" password="developer" authorities="ROLE_USER" />-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
 
     <!--<beans:bean id="userService" class="com.shell.service.UserService"/>-->
  
