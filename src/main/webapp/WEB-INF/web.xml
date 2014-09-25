@@ -67,30 +67,30 @@
     <!--</filter-mapping>-->
 
     <!--Hibernate Lazy loading-->
-    <filter>
-        <filter-name>OpenSessionInViewFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+    <!--<filter>-->
+        <!--<filter-name>OpenSessionInViewFilter</filter-name>-->
+        <!--<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>-->
         <!--<init-param>-->
           <!--<param-name>sessionFactoryBeanName</param-name>-->
           <!--<param-value>sessionFactory</param-value>-->
         <!--</init-param>-->
-        <init-param>
-            <param-name>singleSession</param-name>
-            <param-value>false</param-value>
-        </init-param>
+        <!--<init-param>-->
+            <!--<param-name>singleSession</param-name>-->
+            <!--<param-value>false</param-value>-->
+        <!--</init-param>-->
         <!--<init-param>-->
             <!--<param-name>flushMode</param-name>-->
             <!--<param-value>AUTO</param-value>-->
         <!--</init-param>-->
-    </filter>
-    <filter-mapping>
-        <filter-name>OpenSessionInViewFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <!--<dispatcher>REQUEST</dispatcher>-->
-        <!--<dispatcher>FORWARD</dispatcher>-->
-    </filter-mapping>
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>OpenSessionInViewFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+        <!--&lt;!&ndash;<dispatcher>REQUEST</dispatcher>&ndash;&gt;-->
+        <!--&lt;!&ndash;<dispatcher>FORWARD</dispatcher>&ndash;&gt;-->
+    <!--</filter-mapping>-->
 
-  <resource-ref>
+    <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/villasDS</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>

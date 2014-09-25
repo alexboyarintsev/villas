@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
@@ -79,15 +80,21 @@ public abstract class DAO<E> extends HibernateDaoSupport {
         });
     }
 
+    // TODO move to service layer - just testing
+    @Transactional
     public E create(E e) throws Exception {
         getHibernateTemplate().saveOrUpdate(e);
         return e;
     }
 
+    // TODO move to service layer - just testing
+    @Transactional
     public void delete(E e) throws Exception {
         getHibernateTemplate().delete(e);
     }
 
+    // TODO move to service layer - just testing
+    @Transactional
     public E update(E e) throws Exception {
         getHibernateTemplate().update(e);
         return e;
