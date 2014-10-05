@@ -1,5 +1,7 @@
 package main.com.villas.db.dao.impldao;
 
+import main.com.villas.db.dao.AbstractHibernateDao;
+import main.com.villas.db.dao.idao.ICustomerDao;
 import main.com.villas.db.domain.Customer;
 import org.springframework.stereotype.Repository;
 
@@ -7,11 +9,11 @@ import org.springframework.stereotype.Repository;
  * Created by aboyarintsev on 10.09.2014.
  */
 @Repository
-public class CustomerDAO  {
-//public class CustomerDAO extends DAO<Customer> {
+public class CustomerDao extends AbstractHibernateDao<Customer> implements ICustomerDao{
 
-//    protected CustomerDAO(Class<Customer> entityClass) {
-//        super(entityClass);
-//    }
+    public CustomerDao() {
+        super();
+        setClazz(Customer.class);
+    }
 
 }

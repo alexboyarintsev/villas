@@ -16,7 +16,7 @@ import java.util.Random;
 @Transactional
 public class TestDataService {
 
-    private static final int VILLAS_COUNT = 100;
+    private static final int VILLAS_COUNT = 5;
     private static final int PRICE_RANGE = 500;
 
     private final Random random = new Random();
