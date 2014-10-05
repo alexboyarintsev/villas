@@ -1,4 +1,4 @@
-package main.com.villas.db.dao;
+package main.com.villas.db.dao.impldao;
 
 import main.com.villas.db.domain.Customer;
 import org.springframework.stereotype.Repository;

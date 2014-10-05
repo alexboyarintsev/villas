@@ -1,8 +1,10 @@
-package main.com.villas.service;
+package main.com.villas.service.implservice;
 
 import main.com.villas.db.domain.Villa;
+import main.com.villas.service.iservice.IVillaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Random;
@@ -11,6 +13,7 @@ import java.util.Random;
  * Created by aboyarintsev on 10.09.2014.
  */
 @Service
+@Transactional
 public class TestDataService {
 
     private static final int VILLAS_COUNT = 100;
@@ -19,7 +22,7 @@ public class TestDataService {
     private final Random random = new Random();
 
     @Autowired
-    private VillaService villaService;
+    private IVillaService villaService;
 
     public void generate() throws Exception {
         generateVillas();

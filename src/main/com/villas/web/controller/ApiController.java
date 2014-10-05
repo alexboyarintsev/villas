@@ -2,8 +2,9 @@ package main.com.villas.web.controller;
 
 import com.google.gson.Gson;
 import main.com.villas.db.domain.Villa;
-import main.com.villas.service.TestDataService;
-import main.com.villas.service.VillaService;
+import main.com.villas.service.implservice.TestDataService;
+import main.com.villas.service.implservice.VillaService;
+import main.com.villas.service.iservice.IVillaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ApiController {
 
     @Autowired
-    private VillaService villaService;
+    private IVillaService villaService;
 
     @Autowired
     private TestDataService testDataService;
@@ -38,7 +39,7 @@ public class ApiController {
     String getVillas() {
         List<Villa> villas = new ArrayList<>();
         try {
-            villas = villaService.getVillas();
+            villas = villaService.findAll();
         } catch (Exception e) {
             // TODO handle it
         }
