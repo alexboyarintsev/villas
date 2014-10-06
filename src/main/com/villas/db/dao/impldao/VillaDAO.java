@@ -13,7 +13,7 @@ public class VillaDao extends AbstractHibernateDao<Villa> implements IVillaDao {
 
     public VillaDao() {
         super();
-        setClazz(Villa.class);
+        setClazz(Villa.class) ;
     }
 
 }
