@@ -61,6 +61,13 @@ public class ReservationController {
         return gson.toJson(res);
     }
 
+    @RequestMapping(value = "bookedDates", method = RequestMethod.GET)
+    public @ResponseBody
+    String getBookedDates() {
+        List<Date> res = reservationService.getBookedDates(villaService.findAll().get(0).getId());
+        return gson.toJson(res);
+    }
+
     @RequestMapping(value = "customers", method = RequestMethod.POST)
     public @ResponseBody
     String createCustomers() {

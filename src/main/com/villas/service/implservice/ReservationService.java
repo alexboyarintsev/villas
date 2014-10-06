@@ -10,10 +10,14 @@ import main.com.villas.service.iservice.IReservationService;
 import main.com.villas.service.iservice.IVillaService;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +26,8 @@ import java.util.List;
  */
 @Service
 public class ReservationService extends AbstractService<Reservation> implements IReservationService {
+
+    public final static DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
     @Autowired
     private IReservationDao reservationDao;
@@ -55,9 +61,20 @@ public class ReservationService extends AbstractService<Reservation> implements 
         create(reservation);
     }
 
-//    public List<Date> getBookedDates(long villaId) {
-//
-//    }
+    public List<Date> getBookedDates(long villaId) {
+        List<Reservation> reservations = reservationDao.findByVillaId(villaId);
+        List<Date> days = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            DateTime start = new DateTime(reservation.getDateStart());
+            DateTime stop = new DateTime(reservation.getDateFinish());
+            DateTime inter = start;
+            while (inter.compareTo(stop) <= 0) {
+                days.add(inter.toDate());
+                inter = inter.plusDays(1);
+            }
+        }
+        return days;
+    }
 
     private int getTotalDays(DateTime dateStart, DateTime dateFinish) {
         return Days.daysBetween(dateStart, dateFinish).getDays();

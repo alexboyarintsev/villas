@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
  * Created by aboyarintsev on 10.09.2014.
  */
 @Repository
-public class CustomerDao extends AbstractHibernateDao<Customer> implements ICustomerDao {
+public class CustomerDAO extends AbstractHibernateDao<Customer> implements ICustomerDao {
 
-    public CustomerDao() {
+    public CustomerDAO() {
         super();
         setClazz(Customer.class);
     }
