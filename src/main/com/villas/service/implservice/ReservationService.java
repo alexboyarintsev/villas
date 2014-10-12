@@ -76,6 +76,39 @@ public class ReservationService extends AbstractService<Reservation> implements 
         return days;
     }
 
+    @Override
+    public List<Reservation> findWaiting() {
+        return reservationDao.findWaiting();
+    }
+
+    @Override
+    public List<Reservation> findApproved() {
+        return reservationDao.findApproved();
+    }
+
+    @Override
+    public List<Reservation> findRejected() {
+        return reservationDao.findRejected();
+    }
+
+    @Override
+    public void markWaiting(long reservationId) {
+        Reservation r = reservationDao.findOne(reservationId);
+        r.setStatus((byte)0);
+    }
+
+    @Override
+    public void markApproved(long reservationId) {
+        Reservation r = reservationDao.findOne(reservationId);
+        r.setStatus((byte)1);
+    }
+
+    @Override
+    public void markRejected(long reservationId) {
+        Reservation r = reservationDao.findOne(reservationId);
+        r.setStatus((byte)-1);
+    }
+
     private int getTotalDays(DateTime dateStart, DateTime dateFinish) {
         return Days.daysBetween(dateStart, dateFinish).getDays();
     }

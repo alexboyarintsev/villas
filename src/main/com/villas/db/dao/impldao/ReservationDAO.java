@@ -31,4 +31,22 @@ public class ReservationDAO extends AbstractHibernateDao<Reservation> implements
         query.setLong("id", villaId);
         return query.list();
     }
+
+    @Override
+    public List<Reservation> findWaiting() {
+        Query query = getCurrentSession().createQuery("from " + clazz.getName() + " as r where r.status = 0" );
+        return query.list();
+    }
+
+    @Override
+    public List<Reservation> findApproved() {
+        Query query = getCurrentSession().createQuery("from " + clazz.getName() + " as r where r.status = 1" );
+        return query.list();
+    }
+
+    @Override
+    public List<Reservation> findRejected() {
+        Query query = getCurrentSession().createQuery("from " + clazz.getName() + " as r where r.status = -1" );
+        return query.list();
+    }
 }

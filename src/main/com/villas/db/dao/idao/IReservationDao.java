@@ -11,4 +11,11 @@ import java.util.List;
 public interface IReservationDao extends IOperations<Reservation> {
 
     List<Reservation> findByVillaId(long villaId);
+
+    List<Reservation> findWaiting();
+
+    List<Reservation> findApproved();
+
+    List<Reservation> findRejected();
+
 }

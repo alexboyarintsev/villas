@@ -10,6 +10,8 @@
             http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd">
     
     <mvc:annotation-driven />
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <!--<mvc:resources mapping="/js/**" location="/js/"/>-->
     <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
     
     <context:component-scan base-package="main.com.villas" />

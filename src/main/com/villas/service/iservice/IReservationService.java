@@ -16,4 +16,16 @@ public interface IReservationService extends IOperations<Reservation> {
     void createWithPreProcessing(Customer customer, long villaId, DateTime dateStart, DateTime dateFinish);
 
     List<Date> getBookedDates(long villaId);
+
+    List<Reservation> findWaiting();
+
+    List<Reservation> findApproved();
+
+    List<Reservation> findRejected();
+
+    void markWaiting(long reservationId);
+
+    void markApproved(long reservationId);
+
+    void markRejected(long reservationId);
 }
