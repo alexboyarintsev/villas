@@ -19,8 +19,9 @@ public class Villa implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "cover", nullable = false)
-    private String cover;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", nullable = false)
+    private Gallery gallery;
 
     @Column(name = "description", nullable = false, columnDefinition = "text")
     private String description;
@@ -44,12 +45,12 @@ public class Villa implements Serializable {
         this.name = name;
     }
 
-    public String getCover() {
-        return cover;
+    public Gallery getGallery() {
+        return gallery;
     }
 
-    public void setCover(String cover) {
-        this.cover = cover;
+    public void setGallery(Gallery gallery) {
+        this.gallery = gallery;
     }
 
     public String getDescription() {

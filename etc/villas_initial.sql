@@ -6,19 +6,18 @@ USE villas;
 CREATE TABLE villas (
 	id          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	name        VARCHAR(100) NOT NULL,
-	cover       VARCHAR(100) NOT NULL,
 	price       DECIMAL      NOT NULL,	
 	description TEXT         NOT NULL,
-	PRIMARY KEY (id)
-);
+  PRIMARY KEY (id)
+) ENGINE=INNODB;
 
 CREATE TABLE galleries (
-	id           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	villa_id     BIGINT UNSIGNED NOT NULL,
+  id           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  villa_id     BIGINT UNSIGNED NOT NULL,
 	picture_name VARCHAR(100)    NOT NULL,
-	CONSTRAINT fk_galleries_villas FOREIGN KEY (villa_id) REFERENCES villas(id),
-	PRIMARY KEY (id)
-);
+  PRIMARY KEY (id),
+  CONSTRAINT fk_galleries_villas FOREIGN KEY (villa_id) REFERENCES villas(id)
+) ENGINE=INNODB;
 
 # CREATE TABLE addresses (
 # 	id       BIGINT UNSIGNED   NOT NULL AUTO_INCREMENT,
@@ -41,7 +40,7 @@ CREATE TABLE customers (
 # 	address     BIGINT UNSIGNED NOT NULL,
 # 	CONSTRAINT fk_customers_addresses FOREIGN KEY (address) REFERENCES addresses(id),
 	PRIMARY KEY (id)
-);
+) ENGINE=INNODB;
 
 CREATE TABLE reservations (
 	id           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -57,4 +56,4 @@ CREATE TABLE reservations (
 	CONSTRAINT fk_reservations_villas    FOREIGN KEY (villa_id)    REFERENCES villas(id),
 	CONSTRAINT fk_reservations_customers FOREIGN KEY (customer_id) REFERENCES customers(id),
 	PRIMARY KEY (id)
-);
+) ENGINE=INNODB;

@@ -40,9 +40,8 @@
                 <td>${reservation.totalDays}</td>
                 <td>${reservation.price}</td>
                 <td>${reservation.totalPrice}</td>
-                <td><a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=1">Approve   </a>
-                    <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=-1">Reject</a>
-                    <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=0">Wait</a></td>
+                <td><a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=1">Approve</a>
+                    <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=-1">Reject</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -77,8 +76,7 @@
                 <td>${reservation.totalDays}</td>
                 <td>${reservation.price}</td>
                 <td>${reservation.totalPrice}</td>
-                <td><a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=1">Approve   </a>
-                    <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=-1">Reject</a>
+                <td><a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=-1">Reject</a>
                     <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=0">Wait</a></td>
             </tr>
         </c:forEach>
@@ -114,8 +112,7 @@
                 <td>${reservation.totalDays}</td>
                 <td>${reservation.price}</td>
                 <td>${reservation.totalPrice}</td>
-                <td><a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=1">Approve   </a>
-                    <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=-1">Reject</a>
+                <td><a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=1">Approve</a>
                     <a href="${pageContext.request.contextPath}/admin/reservations/${reservation.id}?status=0">Wait</a></td>
             </tr>
         </c:forEach>
