@@ -15,12 +15,20 @@ public class Gallery implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Id
     @Column(name="villa_id")
     private Long villaId;
 
-    @Column(name = "picture_name", nullable = false)
-    private String pictureName;
+    @Column(name = "image_name")
+    private String imageName;
+
+    @Column(name = "image", length = 100000)
+    private byte[] image;
+
+    @Column(name = "thumb")
+    private byte thumb;
+
+    @Column(name = "cover")
+    private byte cover;
 
     public Long getId() {
         return id;
@@ -38,12 +46,35 @@ public class Gallery implements Serializable {
         this.villaId = villaId;
     }
 
-    public String getPictureName() {
-        return pictureName;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setPictureName(String pictureName) {
-        this.pictureName = pictureName;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte getCover() {
+        return cover;
+    }
+
+    public void setCover(byte cover) {
+        this.cover = cover;
+    }
+
+    public byte getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(byte thumb) {
+        this.thumb = thumb;
+    }
 }

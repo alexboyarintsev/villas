@@ -40,7 +40,6 @@ public class TestDataService {
         for (int i = 0; i < VILLAS_COUNT; i++) {
             Villa villa = new Villa();
             villa.setName("Villa" + i + 1);
-//            villa.setCover("picture_path");
             villa.setDescription("desc");
             villa.setPrice(new BigDecimal(random.nextInt(PRICE_RANGE) + 10));
             villaService.create(villa);

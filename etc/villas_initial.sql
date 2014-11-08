@@ -14,9 +14,12 @@ CREATE TABLE villas (
 CREATE TABLE galleries (
   id           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   villa_id     BIGINT UNSIGNED NOT NULL,
-	picture_name VARCHAR(100)    NOT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT fk_galleries_villas FOREIGN KEY (villa_id) REFERENCES villas(id)
+	image_name   VARCHAR(100)    NOT NULL,
+	cover        TINYINT         NOT NULL, # 1 or 0
+	thumb        TINYINT         NOT NULL, # 1 or 0
+	image        BLOB            NOT NULL,
+  PRIMARY KEY (id)
+#   CONSTRAINT fk_galleries_villas FOREIGN KEY (villa_id) REFERENCES villas(id)
 ) ENGINE=INNODB;
 
 # CREATE TABLE addresses (
