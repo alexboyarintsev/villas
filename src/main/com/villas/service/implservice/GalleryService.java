@@ -5,6 +5,8 @@ import main.com.villas.db.dao.idao.IGalleryDao;
 import main.com.villas.db.domain.Gallery;
 import main.com.villas.service.AbstractService;
 import main.com.villas.service.iservice.IGalleryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,11 @@ import java.util.List;
 @Service
 public class GalleryService extends AbstractService<Gallery> implements IGalleryService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(GalleryService.class);
+
+    private final static String JPEG = "jpg";
+    private final static String PDF = "pdf";
+
     @Autowired
     private IGalleryDao galleryDao;
 
@@ -26,7 +33,17 @@ public class GalleryService extends AbstractService<Gallery> implements IGallery
         super();
     }
 
-    public void saveImage(long villaId, MultipartFile image, String extention) {
+    public void saveImage(long villaId, MultipartFile image, String fileName) {
+        String contentType = image.getContentType();
+        String extension;
+        switch(contentType) {
+            case "application/pdf" : extension = JPEG; break;
+            case "image/jpeg" : extension = PDF; break;
+            default :
+                LOG.error("Error : unsupported media format");
+                return;
+                // show some error or sth
+        }
         byte[] bImage = new byte[(int) image.getSize()];
 
         try (InputStream inputStream = image.getInputStream()) {
@@ -39,7 +56,9 @@ public class GalleryService extends AbstractService<Gallery> implements IGallery
         Gallery gallery = new Gallery();
         gallery.setVillaId(villaId);
         gallery.setImage(bImage);
-        gallery.setImageName(image.getName());
+        String imageName = fileName != null ? fileName : image.getOriginalFilename();
+        gallery.setImageName(imageName);
+        gallery.setExtension(extension);
 
         galleryDao.create(gallery);
     }
@@ -50,9 +69,9 @@ public class GalleryService extends AbstractService<Gallery> implements IGallery
     }
 
     @Override
-    public List<String> getImageNamesByVillaId(long villaId) {
-        return null;
-    }
+    public List<String> findImageNamesByVillaId(long villaId) {
+        return galleryDao.findImageNamesByVillaId(villaId);
+    };
 
     @Override
     protected IOperations<Gallery> getDao() {

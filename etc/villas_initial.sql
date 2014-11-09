@@ -17,7 +17,8 @@ CREATE TABLE galleries (
 	image_name   VARCHAR(100)    NOT NULL,
 	cover        TINYINT         NOT NULL, # 1 or 0
 	thumb        TINYINT         NOT NULL, # 1 or 0
-	image        BLOB            NOT NULL,
+	image        MEDIUMBLOB      NOT NULL,
+	extension   VARCHAR(5)       NOT NULL,
   PRIMARY KEY (id)
 #   CONSTRAINT fk_galleries_villas FOREIGN KEY (villa_id) REFERENCES villas(id)
 ) ENGINE=INNODB;

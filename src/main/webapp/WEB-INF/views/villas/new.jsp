@@ -8,6 +8,7 @@
 
 <form method="POST" action="${pageContext.request.contextPath}/admin/villas" enctype="multipart/form-data">
     File to upload: <input type="file" name="file"><br />
+    File name: <input type="text" name="fileName"><br /> <br />
     Name: <input type="text" name="name"><br /> <br />
     Description: <input type="text" name="description"><br /> <br />
     Price: <input type="text" name="price"><br /> <br />

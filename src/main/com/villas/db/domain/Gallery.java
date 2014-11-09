@@ -21,7 +21,8 @@ public class Gallery implements Serializable {
     @Column(name = "image_name")
     private String imageName;
 
-    @Column(name = "image", length = 100000)
+    @Lob
+    @Column(name = "image", nullable=false, columnDefinition="mediumblob")
     private byte[] image;
 
     @Column(name = "thumb")
@@ -29,6 +30,9 @@ public class Gallery implements Serializable {
 
     @Column(name = "cover")
     private byte cover;
+
+    @Column(name = "extension")
+    private String extension;
 
     public Long getId() {
         return id;
@@ -76,5 +80,13 @@ public class Gallery implements Serializable {
 
     public void setThumb(byte thumb) {
         this.thumb = thumb;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 }

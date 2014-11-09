@@ -1,7 +1,9 @@
 package main.com.villas.web.controller;
 
+import com.google.gson.Gson;
 import main.com.villas.db.domain.Gallery;
 import main.com.villas.db.domain.Villa;
+import main.com.villas.db.dto.VillaDto;
 import main.com.villas.service.iservice.IGalleryService;
 import main.com.villas.service.iservice.IVillaService;
 import org.apache.commons.io.IOUtils;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by aboyarintsev on 16.10.2014.
@@ -27,6 +30,7 @@ import java.math.BigDecimal;
 class VillasController {
 
     private static final Logger LOG = LoggerFactory.getLogger(VillasController.class);
+    private final Gson gson = new Gson();
 
     @Autowired
     private IVillaService villaService;
@@ -41,7 +45,7 @@ class VillasController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@RequestParam String name, @RequestParam String description,
+    String create(@RequestParam String name, @RequestParam String fileName, @RequestParam String description,
                 @RequestParam String price, @RequestParam MultipartFile file) {
 
         Villa v = new Villa();
@@ -51,22 +55,23 @@ class VillasController {
         villaService.create(v);
 
         if(!file.isEmpty()) {
-            String contentType = file.getContentType();
-            switch(contentType) {
-                case "application/pdf" : galleryService.saveImage(v.getId(), file, "pdf"); break;
-                case "image/jpeg" : galleryService.saveImage(v.getId(), file, "jpeg"); break;
-                default :
-                    LOG.error("Error : unsupported media format");
-                    // show some error or sth
-            }
+            galleryService.saveImage(v.getId(), file, fileName);
         } else {
             //set default image
         }
+        return "villas/index";
     }
 
-    @RequestMapping(value = "image/{name}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public byte[] returnImage(@PathVariable String name) throws IOException {
-        return galleryService.readImage(name);
+    public String getVillas() throws IOException {
+        return gson.toJson(villaService.findVillas());
     }
+
+    @RequestMapping(value = "{id}/galleries", method = RequestMethod.GET)
+    @ResponseBody
+    public String getImage(@PathVariable long id) throws IOException {
+        return gson.toJson(galleryService.findImageNamesByVillaId(id));
+    }
+
 }
