@@ -15,9 +15,9 @@ public class Gallery implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Id
-    @Column(name="villa_id")
-    private Long villaId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "villa_id")
+    private Villa villa;
 
     @Column(name = "picture_name", nullable = false)
     private String pictureName;
@@ -30,12 +30,12 @@ public class Gallery implements Serializable {
         this.id = id;
     }
 
-    public Long getVillaId() {
-        return villaId;
+    public Villa getVilla() {
+        return villa;
     }
 
-    public void setVillaId(Long villaId) {
-        this.villaId = villaId;
+    public void setVilla(Villa villa) {
+        this.villa = villa;
     }
 
     public String getPictureName() {

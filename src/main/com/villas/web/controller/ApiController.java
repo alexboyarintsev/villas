@@ -1,6 +1,7 @@
 package main.com.villas.web.controller;
 
 import com.google.gson.Gson;
+import main.com.villas.db.domain.Reservation;
 import main.com.villas.db.domain.Villa;
 import main.com.villas.service.implservice.TestDataService;
 import main.com.villas.service.implservice.VillaService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by aboyarintsev on 10.09.2014.
@@ -40,6 +42,7 @@ public class ApiController {
         List<Villa> villas = new ArrayList<>();
         try {
             villas = villaService.findAll();
+            Set<Reservation> r = villas.get(0).getReservations();
         } catch (Exception e) {
             // TODO handle it
         }

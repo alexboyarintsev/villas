@@ -1,7 +1,9 @@
 package main.com.villas.service.implservice;
 
 import main.com.villas.db.domain.Customer;
+import main.com.villas.db.domain.Gallery;
 import main.com.villas.db.domain.Villa;
+import main.com.villas.service.iservice.IGalleryService;
 import main.com.villas.service.iservice.IReservationService;
 import main.com.villas.service.iservice.IVillaService;
 import org.joda.time.DateTime;
@@ -31,6 +33,9 @@ public class TestDataService {
     @Autowired
     private IReservationService reservationService;
 
+    @Autowired
+    private IGalleryService galleryService;
+
     public void generate() throws Exception {
         generateVillas();
         generateReservations();
@@ -40,10 +45,13 @@ public class TestDataService {
         for (int i = 0; i < VILLAS_COUNT; i++) {
             Villa villa = new Villa();
             villa.setName("Villa" + i + 1);
-//            villa.setCover("picture_path");
             villa.setDescription("desc");
             villa.setPrice(new BigDecimal(random.nextInt(PRICE_RANGE) + 10));
             villaService.create(villa);
+            Gallery g = new Gallery();
+            g.setVilla(villa);
+            g.setPictureName("picture_name");
+            galleryService.create(g);
         }
     }
 

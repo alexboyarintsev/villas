@@ -3,6 +3,8 @@ package main.com.villas.db.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by aboyarintsev on 10.09.2014.
@@ -19,9 +21,11 @@ public class Villa implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
-    private Gallery gallery;
+    @OneToMany(mappedBy = "villa", cascade = CascadeType.ALL)
+    private Set<Gallery> galleries = new HashSet<>(0);
+
+    @OneToMany(mappedBy = "villa", cascade = CascadeType.ALL)
+    private Set<Reservation> reservations = new HashSet<>(0);
 
     @Column(name = "description", nullable = false, columnDefinition = "text")
     private String description;
@@ -45,12 +49,12 @@ public class Villa implements Serializable {
         this.name = name;
     }
 
-    public Gallery getGallery() {
-        return gallery;
+    public Set<Gallery> getGalleries() {
+        return galleries;
     }
 
-    public void setGallery(Gallery gallery) {
-        this.gallery = gallery;
+    public void setGalleries(Set<Gallery> galleries) {
+        this.galleries = galleries;
     }
 
     public String getDescription() {
@@ -67,5 +71,13 @@ public class Villa implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

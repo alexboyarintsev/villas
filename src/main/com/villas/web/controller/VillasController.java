@@ -40,7 +40,7 @@ class VillasController {
         v.setPrice(new BigDecimal(price));
         Gallery g = new Gallery();
         g.setPictureName("picture_here");
-        v.setGallery(g);
+//        v.setGallery(g);
         villaService.create(v);
 
         System.out.println(v);
