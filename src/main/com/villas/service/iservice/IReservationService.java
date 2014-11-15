@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IReservationService extends IOperations<Reservation> {
 
-    void createWithPreProcessing(Customer customer, long villaId, DateTime dateStart, DateTime dateFinish);
+    void createWithPreProcessing(Customer customer, long villaId, String dateStart, String dateFinish);
 
     List<Date> getBookedDates(long villaId);
 

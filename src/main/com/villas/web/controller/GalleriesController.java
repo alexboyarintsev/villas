@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by aboyarintsev on 09.11.2014.
  */
 @Controller
 @RequestMapping(value = "admin/galleries")
-class GalleryController {
+class GalleriesController {
 
     @Autowired
     private IGalleryService galleryService;

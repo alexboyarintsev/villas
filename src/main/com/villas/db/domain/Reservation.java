@@ -12,6 +12,14 @@ import java.util.Date;
 @Table(name = "reservations")
 public class Reservation implements Serializable {
 
+    public Reservation(){};
+
+    public Reservation(Villa villa, Date dateStart, Date dateFinish) {
+        this.villa = villa;
+        this.dateStart = dateStart;
+        this.dateFinish = dateFinish;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)

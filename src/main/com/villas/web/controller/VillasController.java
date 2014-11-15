@@ -1,32 +1,25 @@
 package main.com.villas.web.controller;
 
 import com.google.gson.Gson;
-import main.com.villas.db.domain.Gallery;
 import main.com.villas.db.domain.Villa;
-import main.com.villas.db.dto.VillaDto;
 import main.com.villas.service.iservice.IGalleryService;
 import main.com.villas.service.iservice.IVillaService;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Created by aboyarintsev on 16.10.2014.
  */
 @Controller
-@RequestMapping(value = "admin/villas")
+@RequestMapping(value = "admin")
 class VillasController {
 
     private static final Logger LOG = LoggerFactory.getLogger(VillasController.class);
@@ -38,14 +31,14 @@ class VillasController {
     @Autowired
     private IGalleryService galleryService;
 
-    @RequestMapping(method = RequestMethod.GET, params = "new")
+    @RequestMapping(value = "villas", method = RequestMethod.GET, params = "new")
     String newVilla() {
         return "villas/new";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "villas", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    String create(@RequestParam String name, @RequestParam String fileName, @RequestParam String description,
+    String createVilla(@RequestParam String name, @RequestParam String fileName, @RequestParam String description,
                 @RequestParam String price, @RequestParam MultipartFile file) {
 
         Villa v = new Villa();
@@ -62,16 +55,21 @@ class VillasController {
         return "villas/index";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "villas", method = RequestMethod.GET)
     public String getVillas() throws IOException {
-        return gson.toJson(villaService.findVillas());
+        return "villas/index";
     }
 
-    @RequestMapping(value = "{id}/galleries", method = RequestMethod.GET)
+    @RequestMapping(value = "villas/{id}/galleries", method = RequestMethod.GET)
     @ResponseBody
     public String getImage(@PathVariable long id) throws IOException {
         return gson.toJson(galleryService.findImageNamesByVillaId(id));
+    }
+
+    @RequestMapping(value = "api/villas", method = RequestMethod.GET)
+    @ResponseBody
+    public String getVillasJson() throws IOException {
+        return gson.toJson(villaService.findVillas());
     }
 
 }

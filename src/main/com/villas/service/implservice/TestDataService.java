@@ -59,7 +59,7 @@ public class TestDataService {
             int randomMonth = random.nextInt(12) + 1;
             int totalDays = random.nextInt(11) + 1;
             DateTime start = new DateTime(DateTime.parse("2014-" + randomMonth + "-" + randomDay));
-            reservationService.createWithPreProcessing(c, villaId, new DateTime(start), start.plusDays(totalDays));
+            reservationService.createWithPreProcessing(c, villaId, ("2014-" + randomMonth + "-" + randomDay), start.plusDays(totalDays).toString());
         }
 
     }

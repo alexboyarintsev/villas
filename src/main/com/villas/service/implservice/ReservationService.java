@@ -44,12 +44,14 @@ public class ReservationService extends AbstractService<Reservation> implements 
         return reservationDao;
     }
 
-    public void createWithPreProcessing(Customer customer, long villaId, DateTime dateStart, DateTime dateFinish) {
+    public void createWithPreProcessing(Customer customer, long villaId, String dateStartStr, String dateFinishStr) {
         Reservation reservation = new Reservation();
         reservation.setCustomer(customer);
         Villa villa = villaService.findOne(villaId);
         reservation.setVilla(villa);
         reservation.setDatePlaced(new Date());
+        DateTime dateStart = new DateTime(DateTime.parse(dateStartStr));
+        DateTime dateFinish = new DateTime(DateTime.parse(dateFinishStr));
         reservation.setDateStart(dateStart.toDate());
         reservation.setDateFinish(dateFinish.toDate());
         int totalDays = getTotalDays(dateStart, dateFinish);

@@ -7,7 +7,6 @@ import main.com.villas.db.domain.Reservation;
 import main.com.villas.service.iservice.ICustomerService;
 import main.com.villas.service.iservice.IReservationService;
 import main.com.villas.service.iservice.IVillaService;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by aboyarintsev on 05.10.2014.
  */
 @Controller
-public class AdminController {
+class AdminController {
 
     private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
 

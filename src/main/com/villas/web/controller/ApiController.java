@@ -3,7 +3,6 @@ package main.com.villas.web.controller;
 import com.google.gson.Gson;
 import main.com.villas.db.domain.Villa;
 import main.com.villas.service.implservice.TestDataService;
-import main.com.villas.service.implservice.VillaService;
 import main.com.villas.service.iservice.IVillaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import java.util.List;
  * Created by aboyarintsev on 10.09.2014.
  */
 @Controller
-public class ApiController {
+class ApiController {
 
     @Autowired
     private IVillaService villaService;
