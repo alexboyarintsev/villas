@@ -3,6 +3,7 @@ package main.com.villas.service.iservice;
 import main.com.villas.db.dao.IOperations;
 import main.com.villas.db.domain.Customer;
 import main.com.villas.db.domain.Reservation;
+import main.com.villas.db.dto.ReservationDto;
 import org.joda.time.DateTime;
 
 import java.util.Date;
@@ -14,6 +15,8 @@ import java.util.List;
 public interface IReservationService extends IOperations<Reservation> {
 
     void createWithPreProcessing(Customer customer, long villaId, String dateStart, String dateFinish);
+
+    void createWithPreProcessing(ReservationDto reservationDto);
 
     List<Date> getBookedDates(long villaId);
 

@@ -2,6 +2,7 @@ package main.com.villas.web.controller;
 
 import main.com.villas.db.domain.Customer;
 import main.com.villas.db.domain.Reservation;
+import main.com.villas.db.dto.ReservationDto;
 import main.com.villas.service.iservice.IPdfService;
 import main.com.villas.service.iservice.IReservationService;
 import main.com.villas.service.iservice.IVillaService;
@@ -34,21 +35,34 @@ class ReservationController {
     @Autowired
     IPdfService pdfService;
 
+    @RequestMapping(value = "reservations", method = RequestMethod.GET, params = "new")
+    String newVilla() {
+        return "reservations/new";
+    }
+
+//    @RequestMapping(value = "reservations", method = RequestMethod.POST, produces = "application/pdf")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseBody
+//    byte[] createReservation(@RequestParam String firstname, @RequestParam String lastname, @RequestParam String passportNo,
+//                             @RequestParam String phone, @RequestParam String email, @RequestParam String dateStart,
+//                             @RequestParam String dateFinish, @RequestParam long villaId) throws IOException, COSVisitorException {
+//        Customer customer = new Customer();
+//        customer.setFirstName(firstname);
+//        customer.setLastName(lastname);
+//        customer.setPassportNo(passportNo);
+//        customer.setPhone(phone);
+//        customer.setEmail(email);
+//
+//        reservationService.createWithPreProcessing(customer, villaId, dateStart, dateFinish);
+//
+//        return pdfService.drawInvoice();
+//    }
+
     @RequestMapping(value = "reservations", method = RequestMethod.POST, produces = "application/pdf")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    byte[] createReservation(@RequestParam String firstname, @RequestParam String lastname, @RequestParam String passportNo,
-                             @RequestParam String phone, @RequestParam String email, @RequestParam String dateStart,
-                             @RequestParam String dateFinish, @RequestParam long villaId) throws IOException, COSVisitorException {
-        Customer customer = new Customer();
-        customer.setFirstName(firstname);
-        customer.setLastName(lastname);
-        customer.setPassportNo(passportNo);
-        customer.setPhone(phone);
-        customer.setEmail(email);
-
-        reservationService.createWithPreProcessing(customer, villaId, dateStart, dateFinish);
-
+    byte[] createReservation(@RequestParam("reservation") ReservationDto reservationDto) throws IOException, COSVisitorException {
+        reservationService.createWithPreProcessing(reservationDto);
         return pdfService.drawInvoice();
     }
 

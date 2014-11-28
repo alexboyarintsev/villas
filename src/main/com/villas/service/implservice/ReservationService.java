@@ -5,6 +5,7 @@ import main.com.villas.db.dao.idao.IReservationDao;
 import main.com.villas.db.domain.Customer;
 import main.com.villas.db.domain.Reservation;
 import main.com.villas.db.domain.Villa;
+import main.com.villas.db.dto.ReservationDto;
 import main.com.villas.service.AbstractService;
 import main.com.villas.service.iservice.IReservationService;
 import main.com.villas.service.iservice.IVillaService;
@@ -61,6 +62,36 @@ public class ReservationService extends AbstractService<Reservation> implements 
         reservation.setTotalPrice(calculateTotalPrice(relevantPrice, totalDays));
         reservation.setStatus((byte)0);
         create(reservation);
+    }
+
+    public void createWithPreProcessing(ReservationDto reservationDto) {
+        Customer customer = createCustomer(reservationDto);
+        Reservation reservation = new Reservation();
+        reservation.setCustomer(customer);
+        Villa villa = villaService.findOne(reservationDto.getVillaId());
+        reservation.setVilla(villa);
+        reservation.setDatePlaced(new Date());
+        DateTime dateStart = new DateTime(DateTime.parse(reservationDto.getDateStart()));
+        DateTime dateFinish = new DateTime(DateTime.parse(reservationDto.getDateFinish()));
+        reservation.setDateStart(dateStart.toDate());
+        reservation.setDateFinish(dateFinish.toDate());
+        int totalDays = getTotalDays(dateStart, dateFinish);
+        reservation.setTotalDays(totalDays);
+        BigDecimal relevantPrice = getRelevantPrice(villa.getPrice());
+        reservation.setPrice(relevantPrice);
+        reservation.setTotalPrice(calculateTotalPrice(relevantPrice, totalDays));
+        reservation.setStatus((byte)0);
+        create(reservation);
+    }
+
+    private Customer createCustomer(ReservationDto reservationDto) {
+        Customer customer = new Customer();
+        customer.setFirstName(reservationDto.getFirstName());
+        customer.setLastName(reservationDto.getLastName());
+        customer.setPassportNo(reservationDto.getPassportNo());
+        customer.setPhone(reservationDto.getPhone());
+        customer.setEmail(reservationDto.getEmail());
+        return customer;
     }
 
     public List<Date> getBookedDates(long villaId) {
